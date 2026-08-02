@@ -409,7 +409,6 @@
 
     .svg-chart-wrapper {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         padding-bottom: 10px;
     }
 

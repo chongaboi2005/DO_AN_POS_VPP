@@ -220,7 +220,7 @@ export default function TransactionHistory() {
                                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10pt', marginTop: '8px' }}>
                                         <span>Phí vận chuyển:</span>
                                         <span style={{ color: '#000' }}>
-                                            30.000đ
+                                            {Number(selectedOrder.shipping_fee || 0).toLocaleString('vi-VN')}đ
                                         </span>
                                     </div>
                                     {selectedOrder.discount_amount > 0 && (

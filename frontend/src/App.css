@@ -446,7 +446,9 @@ body,
   display: flex;
   align-items: center;
   gap: 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .voucher-card:hover {
@@ -494,7 +496,6 @@ body,
   color: #ffffff;
 }
 
-/* --- NÚT XEM CHI TIẾT --- */
 .view-detail-btn {
   width: 100%;
   margin-top: 8px;
@@ -593,7 +594,9 @@ body,
   font-size: 11pt;
   color: #374151;
   border-bottom: 1px solid #e5e7eb;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
   font-weight: bold;
 }
 
@@ -701,7 +704,7 @@ body,
   background: #ffffff;
   width: 450px;
   padding: 20px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   color: #000;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   max-height: 80vh;
@@ -895,6 +898,7 @@ body,
 
 .voucher-list-wrapper {
   flex: 1;
+  max-height: 460px;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding-right: 10px;
@@ -1098,7 +1102,6 @@ body,
   .emp-table-wrapper,
   .order-table-wrapper {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     margin: 0 10px;
     border-radius: 8px;
   }

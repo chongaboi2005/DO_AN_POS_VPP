@@ -31,6 +31,7 @@
     padding: 15px;
     text-align: left;
     border-bottom: 2px solid #e5e7eb;
+    white-space: nowrap;
 }
 
 .order-table td {
@@ -191,7 +192,14 @@
         margin-left: 10px;
         margin-bottom: 15px;
     }
+    .order-table-wrapper {
+        overflow-x: auto;
+    }
 
+    .order-table th,
+    .order-table td {
+        white-space: nowrap;
+    }
     .col-order-id,
     .col-customer-name,
     .badge-status-cancelled {

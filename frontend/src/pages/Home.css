@@ -141,13 +141,38 @@
 /*TỐI ƯU HÓA CHO THIẾT BỊ*/
 @media (max-width: 1080px) {
     .home-blog-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: 85%;
         gap: 15px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 15px;
+    }
+
+    .home-blog-grid .blog-card {
+        scroll-snap-align: start;
     }
 
     .image-banner-section {
         margin: 20px auto 60px auto;
         padding: 0 10px;
+    }
+
+    .scroll-section .product-grid {
+        display: grid;
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: calc(50% - 5px);
+        gap: 10px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 15px;
+    }
+
+    .scroll-section .product-card {
+        scroll-snap-align: start;
     }
 
     .banner-slider-container {

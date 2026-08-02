@@ -94,6 +94,7 @@
 .summary-title {
     margin-top: 0;
     color: #1f2937;
+    margin: 0 0 5px 0;
 }
 
 .summary-row {
@@ -334,10 +335,6 @@
     top: 20px;
 }
 
-.summary-title {
-    margin: 0 0 10px 0;
-}
-
 .checkout-input {
     padding: 8px 12px;
     margin-bottom: 8px;
@@ -414,6 +411,58 @@ input[type="number"]::-webkit-inner-spin-button {
 .customer-cancel-btn:hover {
     background-color: #f87171;
     color: #ffffff;
+}
+
+.province-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 110px;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    margin: 4px 0 0 0;
+    padding: 0;
+    list-style: none;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.province-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.province-dropdown::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 10px;
+}
+
+.province-dropdown li {
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 10pt;
+    color: #374151;
+}
+
+.province-dropdown li:hover {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.province-dropdown li.no-result {
+    color: #9ca3af;
+    font-style: italic;
+    cursor: default;
+}
+
+.province-dropdown li.no-result:hover {
+    background-color: #ffffff;
+    color: #9ca3af;
+    font-weight: normal;
 }
 
 /*TỐI ƯU HÓA CHO THIẾT BỊ*/
@@ -513,7 +562,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
     .history-table-wrapper {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
     }
 
     .history-table th,

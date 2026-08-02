@@ -4,6 +4,10 @@ import Layout from '../component/Layout';
 import { CartContext } from '../context/CartContext';
 import './Cart.css';
 
+const PROVINCES = [
+    "TP. Hồ Chí Minh", "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu", "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước", "Bình Thuận", "Cà Mau", "Cần Thơ", "Cao Bằng", "Đà Nẵng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Nội", "Hà Tĩnh", "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"
+];
+
 export default function Cart() {
     const { cart, updateQuantity, removeFromCart, cartTotal, clearCart, showToast } = useContext(CartContext);
     const navigate = useNavigate();
@@ -13,10 +17,14 @@ export default function Cart() {
     const [dbVouchers, setDbVouchers] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [appliedVoucher, setAppliedVoucher] = useState(null);
+
     const [customerName, setCustomerName] = useState(() => sessionStorage.getItem('temp_name') || '');
     const [customerPhone, setCustomerPhone] = useState(() => sessionStorage.getItem('temp_phone') || '');
     const [customerAddress, setCustomerAddress] = useState(() => sessionStorage.getItem('temp_address') || '');
+    const [customerProvince, setCustomerProvince] = useState(() => sessionStorage.getItem('temp_province') || '');
     const [paymentMethod, setPaymentMethod] = useState(() => sessionStorage.getItem('temp_payment') || 'cod');
+    const [showProvinceDropdown, setShowProvinceDropdown] = useState(false);
+
     const [showQRModal, setShowQRModal] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [orderItems, setOrderItems] = useState([]);
@@ -27,18 +35,21 @@ export default function Cart() {
             setCustomerName('');
             setCustomerPhone('');
             setCustomerAddress('');
+            setCustomerProvince('');
             setPaymentMethod('cod');
             sessionStorage.removeItem('temp_name');
             sessionStorage.removeItem('temp_phone');
             sessionStorage.removeItem('temp_address');
+            sessionStorage.removeItem('temp_province');
             sessionStorage.removeItem('temp_payment');
         } else {
             sessionStorage.setItem('temp_name', customerName);
             sessionStorage.setItem('temp_phone', customerPhone);
             sessionStorage.setItem('temp_address', customerAddress);
+            sessionStorage.setItem('temp_province', customerProvince);
             sessionStorage.setItem('temp_payment', paymentMethod);
         }
-    }, [customerName, customerPhone, customerAddress, paymentMethod, cart.length]);
+    }, [customerName, customerPhone, customerAddress, customerProvince, paymentMethod, cart.length]);
 
     useEffect(() => {
         if (selectedOrder || showQRModal || isModalOpen || cancelOrderId) {
@@ -95,9 +106,19 @@ export default function Cart() {
             return;
         }
 
+        if (!PROVINCES.includes(customerProvince)) {
+            showToast('Vui lòng chọn Tỉnh/Thành phố nhận hàng trước!', 'error');
+            return;
+        }
+
         const validVoucher = dbVouchers.find(v => v.code === code.toUpperCase() && v.type === 'online');
 
         if (validVoucher) {
+            if (validVoucher.discount_type !== 'ship') {
+                showToast('Đơn hàng Online chỉ hỗ trợ áp dụng mã Giảm phí vận chuyển!', 'error');
+                return;
+            }
+
             if (safeCartTotal < validVoucher.min_order) {
                 showToast(`Đơn hàng chưa đủ ${validVoucher.min_order.toLocaleString('vi-VN')}đ để áp dụng mã này!`, 'error');
                 return;
@@ -110,17 +131,21 @@ export default function Cart() {
         }
     };
 
+    const shippingFee = PROVINCES.includes(customerProvince)
+        ? (customerProvince === 'TP. Hồ Chí Minh' ? 30000 : 50000)
+        : 0;
+
     const calculateDiscount = () => {
-        if (appliedVoucher && appliedVoucher.discount_type === 'ship') {
-            if (safeCartTotal >= appliedVoucher.min_order) {
-                return Math.min(appliedVoucher.discount_value, 30000);
-            }
+        if (!appliedVoucher) return 0;
+        if (safeCartTotal < appliedVoucher.min_order) return 0;
+
+        if (appliedVoucher.discount_type === 'ship') {
+            return Math.min(appliedVoucher.discount_value, shippingFee);
         }
         return 0;
     };
 
     const discountAmount = calculateDiscount();
-    const shippingFee = 30000;
     const finalTotal = safeCartTotal + shippingFee - discountAmount;
 
     const handleCheckout = (e) => {
@@ -139,6 +164,11 @@ export default function Cart() {
             return;
         }
 
+        if (!PROVINCES.includes(customerProvince)) {
+            showToast("Vui lòng tìm và chọn Tỉnh/Thành phố từ danh sách!", "error");
+            return;
+        }
+
         if (paymentMethod === 'transfer') {
             setShowQRModal(true);
         } else {
@@ -149,10 +179,12 @@ export default function Cart() {
     const completeOrder = async (e) => {
         const currentCustomerUser = sessionStorage.getItem('username') || '';
 
+        const fullAddress = `${customerAddress.trim()}, ${customerProvince}`;
+
         const orderData = {
             customer_name: customerName,
             customer_phone: customerPhone,
-            customer_address: customerAddress,
+            customer_address: fullAddress,
             customer_username: currentCustomerUser,
             username: '',
             cashier_name: '',
@@ -173,7 +205,7 @@ export default function Cart() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(orderData)
             });
-            
+
             const data = await res.json();
             if (!res.ok) {
                 throw new Error(data.error || "Không thể đặt hàng!");
@@ -183,11 +215,13 @@ export default function Cart() {
             setCustomerName('');
             setCustomerPhone('');
             setCustomerAddress('');
+            setCustomerProvince('');
             showToast("Đã đặt hàng thành công!", "success");
             clearCart();
             sessionStorage.removeItem('temp_name');
             sessionStorage.removeItem('temp_phone');
             sessionStorage.removeItem('temp_address');
+            sessionStorage.removeItem('temp_province');
             sessionStorage.removeItem('temp_payment');
             setActiveTab('history');
 
@@ -311,7 +345,63 @@ export default function Cart() {
                                         <h4 style={{ margin: '0 0 4px 0', color: '#1f2937', fontSize: '11pt' }}>1. Thông tin chi tiết</h4>
                                         <input type="text" placeholder="Họ và tên người nhận" className="checkout-input" value={customerName} onChange={e => setCustomerName(e.target.value)} style={{ padding: '6px 10px', marginBottom: '6px' }} />
                                         <input type="number" placeholder="Số điện thoại liên hệ" className="checkout-input" value={customerPhone} onWheel={(e) => e.target.blur()} onKeyDown={(e) => ['e', 'E', '+', '-', '.', ','].includes(e.key) && e.preventDefault()} onChange={e => setCustomerPhone(e.target.value)} style={{ padding: '6px 10px', marginBottom: '6px' }} />
-                                        <input type="text" placeholder="Địa chỉ chi tiết" className="checkout-input" value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} style={{ padding: '6px 10px', marginBottom: '0' }} />
+
+                                        <div style={{ display: 'flex', gap: '10px', marginBottom: '0' }}>
+                                            <input
+                                                type="text"
+                                                placeholder="Số nhà, đường, phường/xã..."
+                                                className="checkout-input"
+                                                value={customerAddress}
+                                                onChange={e => setCustomerAddress(e.target.value)}
+                                                style={{ padding: '6px 10px', marginBottom: '0', flex: 2 }}
+                                            />
+
+                                            <div style={{ position: 'relative', flex: 1.5 }}>
+                                                <input
+                                                    type="text"
+                                                    className="checkout-input"
+                                                    placeholder="Chọn Tỉnh/Thành..."
+                                                    value={customerProvince}
+                                                    onChange={e => {
+                                                        setCustomerProvince(e.target.value);
+                                                        setShowProvinceDropdown(true);
+                                                    }}
+                                                    onFocus={() => {
+                                                        setShowProvinceDropdown(true);
+                                                    }}
+                                                    onBlur={() => setTimeout(() => setShowProvinceDropdown(false), 3000)}
+                                                    style={{ padding: '6px 30px 6px 10px', marginBottom: '0', width: '100%', boxSizing: 'border-box' }}
+                                                />
+                                                <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#9ca3af', fontSize: '10pt' }}>
+                                                    ▼
+                                                </span>
+                                                {showProvinceDropdown && (
+                                                    <ul className="province-dropdown">
+                                                        {((PROVINCES.includes(customerProvince) || customerProvince.trim() === '')
+                                                            ? PROVINCES
+                                                            : PROVINCES.filter(p => p.toLowerCase().includes(customerProvince.toLowerCase()))
+                                                        ).map(p => (
+                                                            <li
+                                                                key={p}
+                                                                onMouseDown={(e) => e.preventDefault()}
+                                                                onClick={() => {
+                                                                    setCustomerProvince(p);
+                                                                    setShowProvinceDropdown(false);
+                                                                    if (document.activeElement) {
+                                                                        document.activeElement.blur();
+                                                                    }
+                                                                }}
+                                                            >
+                                                                {p}
+                                                            </li>
+                                                        ))}
+                                                        {customerProvince.trim() !== '' && !PROVINCES.includes(customerProvince) && PROVINCES.filter(p => p.toLowerCase().includes(customerProvince.toLowerCase())).length === 0 && (
+                                                            <li className="no-result">Không tìm thấy tỉnh...</li>
+                                                        )}
+                                                    </ul>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div style={{ marginBottom: '5px' }}>
@@ -346,12 +436,17 @@ export default function Cart() {
                                         <span>{Number(safeCartTotal).toLocaleString('vi-VN')}đ</span>
                                     </div>
 
-                                    <div className="summary-row" style={{ marginBottom: '4px', fontSize: '11pt' }}>
-                                        <span>Phí vận chuyển:</span>
-                                        <span style={{ color: '#4b5563' }}>
-                                            30.000đ
-                                        </span>
-                                    </div>
+                                    {PROVINCES.includes(customerProvince) && (
+                                        <div className="summary-row" style={{ marginBottom: '4px', fontSize: '11pt' }}>
+                                            <span>
+                                                Phí vận chuyển:
+                                                {shippingFee === 50000 && <span style={{ fontSize: '9pt', color: '#d97706', display: 'block', fontStyle: 'italic' }}>(Phụ thu ngoại tỉnh)</span>}
+                                            </span>
+                                            <span style={{ color: '#4b5563' }}>
+                                                {Number(shippingFee).toLocaleString('vi-VN')}đ
+                                            </span>
+                                        </div>
+                                    )}
 
                                     {discountAmount > 0 && (
                                         <div className="summary-row" style={{ color: '#10b981', fontWeight: 'bold', marginBottom: '4px', fontSize: '11pt' }}>
@@ -393,7 +488,7 @@ export default function Cart() {
                                 <tr>
                                     <th>Mã Đơn</th>
                                     <th>Ngày đặt hàng</th>
-                                    <th style={{ textAlign: 'left' }}>Thông tin nhận hàng</th>
+                                    <th style={{ textAlign: 'left' }}>Thông tin khách hàng</th>
                                     <th>Tổng tiền</th>
                                     <th>Trạng thái</th>
                                     <th>Thao tác</th>
@@ -564,7 +659,7 @@ export default function Cart() {
                                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10pt', marginTop: '8px' }}>
                                         <span>Phí vận chuyển:</span>
                                         <span style={{ color: '#000' }}>
-                                            30.000đ
+                                            {Number(selectedOrder.shipping_fee || 0).toLocaleString('vi-VN')}đ
                                         </span>
                                     </div>
                                     {selectedOrder.discount_amount > 0 && (

@@ -436,7 +436,7 @@ export default function ImportInventory() {
                                         <div key={p.id} className={`prod-card ${isSelected ? 'selected' : ''}`} onClick={() => addToImport(p)} title={p.name}>
                                             <img src={p.image_url} alt={p.name} />
                                             <div className="prod-card-info">
-                                                <h5 style={{ width: '100%', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal', margin: '0 0 10px 0', lineHeight: '1.4' }}>{p.name}</h5>
+                                                <h5>{p.name}</h5>
                                                 <p><span style={{ color: '#4b5563' }}>Kho: {p.stock}</span></p>
                                             </div>
                                         </div>

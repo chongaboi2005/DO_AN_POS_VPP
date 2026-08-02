@@ -276,6 +276,15 @@ input[type="number"]::-webkit-inner-spin-button {
         width: 100%;
     }
 
+    .inventory-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .inv-table th,
+    .inv-table td {
+        white-space: nowrap;
+    }
+
     .inv-input {
         width: 100%;
         box-sizing: border-box;
