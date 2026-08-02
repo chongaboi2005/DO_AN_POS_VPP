@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Trang-1" id="HEiOgym0XErAj0UOSo3E">
+    <mxGraphModel dx="985" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=14;" value="Khách hàng" vertex="1">
+          <mxGeometry height="80" width="40" x="120" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-2" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=14;" value="Nhân viên thu ngân" vertex="1">
+          <mxGeometry height="80" width="40" x="120" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-4" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=14;" value="Quản lý của hàng" vertex="1">
+          <mxGeometry height="80" width="40" x="760" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-5" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=14;" value="Nhân viên kho" vertex="1">
+          <mxGeometry height="80" width="40" x="760" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-6" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" value="Đăng nhập/Đăng xuất" vertex="1">
+          <mxGeometry height="40" width="180" x="370" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-7" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" value="Mua hàng trực tuyến" vertex="1">
+          <mxGeometry height="40" width="160" x="240" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-8" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" value="Quản lý kho hàng" vertex="1">
+          <mxGeometry height="40" width="140" x="530" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-9" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" value="Bán hàng tại quầy" vertex="1">
+          <mxGeometry height="40" width="160" x="240" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" value="Vận hành hệ thống" vertex="1">
+          <mxGeometry height="40" width="160" x="520" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=14;" value="Hệ thống Web-POS" vertex="1">
+          <mxGeometry height="30" width="140" x="400" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-16" edge="1" parent="1" source="ZIS1oIPOCFre_iDcY6Ze-1" style="endArrow=none;html=1;rounded=0;" target="ZIS1oIPOCFre_iDcY6Ze-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="400" y="310" as="sourcePoint" />
+            <mxPoint x="450" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-17" edge="1" parent="1" source="ZIS1oIPOCFre_iDcY6Ze-6" style="endArrow=none;html=1;rounded=0;" target="ZIS1oIPOCFre_iDcY6Ze-4" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="470" y="300" as="sourcePoint" />
+            <mxPoint x="724" y="395" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-18" edge="1" parent="1" source="ZIS1oIPOCFre_iDcY6Ze-2" style="endArrow=none;html=1;rounded=0;" target="ZIS1oIPOCFre_iDcY6Ze-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="250" y="250" as="sourcePoint" />
+            <mxPoint x="504" y="345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-19" edge="1" parent="1" source="ZIS1oIPOCFre_iDcY6Ze-2" style="endArrow=none;html=1;rounded=0;" target="ZIS1oIPOCFre_iDcY6Ze-9" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="450" y="130" as="sourcePoint" />
+            <mxPoint x="704" y="225" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-20" edge="1" parent="1" source="ZIS1oIPOCFre_iDcY6Ze-6" style="endArrow=none;html=1;rounded=0;" target="ZIS1oIPOCFre_iDcY6Ze-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="600" y="220" as="sourcePoint" />
+            <mxPoint x="854" y="315" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-21" edge="1" parent="1" source="ZIS1oIPOCFre_iDcY6Ze-1" style="endArrow=none;html=1;rounded=0;" target="ZIS1oIPOCFre_iDcY6Ze-7" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="450" y="330" as="sourcePoint" />
+            <mxPoint x="500" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-22" edge="1" parent="1" source="ZIS1oIPOCFre_iDcY6Ze-5" style="endArrow=none;html=1;rounded=0;" target="ZIS1oIPOCFre_iDcY6Ze-8" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="450" y="330" as="sourcePoint" />
+            <mxPoint x="500" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-23" edge="1" parent="1" source="ZIS1oIPOCFre_iDcY6Ze-4" style="endArrow=none;html=1;rounded=0;" target="ZIS1oIPOCFre_iDcY6Ze-10" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="450" y="330" as="sourcePoint" />
+            <mxPoint x="500" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIS1oIPOCFre_iDcY6Ze-24" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="400" width="520" x="200" y="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

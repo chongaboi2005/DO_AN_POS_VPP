@@ -1,0 +1,469 @@
+.dash-container {
+    padding: 30px 5px;
+    background: #f9fafb;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.dash-header {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.dash-title {
+    color: #1e3a8a;
+    margin: 0;
+    font-size: 20pt;
+}
+
+.dash-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+    height: auto;
+}
+
+.dash-card {
+    border-radius: 12px;
+    padding: 10px 15px;
+    min-height: 100px;
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: none;
+}
+
+.dash-card:hover {
+    transform: translateY(-4px);
+}
+
+.dash-card:nth-child(1) {
+    background: linear-gradient(135deg, #22c55e, #166534);
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+}
+
+.dash-card:nth-child(2) {
+    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.dash-card:nth-child(3) {
+    background: linear-gradient(135deg, #a855f7, #6b21a8);
+    box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3);
+}
+
+.dash-card:nth-child(4) {
+    background: linear-gradient(135deg, #facc15, #ca8a04);
+    box-shadow: 0 4px 10px rgba(250, 204, 21, 0.3);
+}
+
+.card-title {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.card-value {
+    font-size: 18pt;
+    font-weight: bold;
+    margin: 0;
+    color: #1f2937;
+}
+
+.card-qty {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+.dash-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.dash-chart-section {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e5e7eb;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chart-title {
+    font-size: 15pt;
+    font-weight: bold;
+    color: #1f2937;
+    margin: 0;
+}
+
+.chart-tabs {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 1px;
+}
+
+.chart-tab {
+    padding: 8px 15px;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    color: #6b7280;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 11pt;
+}
+
+.chart-tab.active {
+    background: #ffffff;
+    color: #2563eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.svg-chart-wrapper {
+    width: 100%;
+    height: 400px;
+    position: relative;
+}
+
+.dash-top-products {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e5e7eb;
+    box-sizing: border-box;
+}
+
+.top-list {
+    margin-top: 25px;
+    display: grid;
+    grid-template-rows: repeat(5, auto);
+    grid-auto-flow: column;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+
+.top-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #f3f4f6;
+    background: #f9fafb;
+    transition: 0.2s;
+    height: max-content;
+}
+
+.top-item:hover {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.top-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-item-name {
+    font-weight: bold;
+    color: #374151;
+    font-size: 11pt;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+}
+
+.top-item-qty {
+    font-weight: bold;
+    color: #10b981;
+    font-size: 11pt;
+    padding: 1px 10px;
+    border-radius: 6px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
+.top-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-open-feature {
+    background: #f59e0b;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 11pt;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-open-feature:hover {
+    background: #d97706;
+}
+
+.feature-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.feature-modal-box {
+    background: white;
+    width: 650px;
+    max-width: 95%;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: popIn 0.3s ease;
+}
+
+.feature-modal-body {
+    padding: 10px;
+    max-height: 380px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.feature-checkbox-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    gap: 15px;
+}
+
+.feature-checkbox-item:hover {
+    background: #f3f4f6;
+}
+
+.feature-checkbox-item.selected {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.feature-item-name {
+    font-weight: bold;
+    color: #374151;
+    font-size: 11pt;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+.feature-checkbox {
+    transform: scale(1.3);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+
+.custom-date-filter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #f3f4f6;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.custom-date-filter input[type="date"] {
+    border: none;
+    background: transparent;
+    font-size: 11pt;
+    color: #4b5563;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/*TỐI ƯU HÓA CHO THIẾT BỊ*/
+@media (max-width: 1080px) {
+    .dash-container {
+        padding: 15px 5px;
+    }
+
+    .dash-header {
+        margin-left: 10px;
+        margin-bottom: 15px;
+    }
+
+    .dash-title {
+        font-size: 18pt;
+    }
+
+    .dash-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        height: auto;
+    }
+
+    .dash-card {
+        padding: 10px;
+        min-height: 85px;
+    }
+
+    .card-title {
+        font-size: 10pt;
+    }
+
+    .card-value {
+        font-size: 13pt;
+        margin-top: 5px;
+    }
+
+    .card-qty {
+        font-size: 9pt;
+    }
+
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .chart-tabs {
+        width: 100%;
+        justify-content: space-between;
+        overflow-x: auto;
+    }
+
+    .chart-tab {
+        flex: 1;
+        text-align: center;
+        padding: 8px 2px;
+        font-size: 10pt;
+        white-space: nowrap;
+    }
+
+    .svg-chart-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+    }
+
+    .svg-chart-wrapper svg {
+        width: 830px;
+        height: 380px;
+    }
+
+    .top-header-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .btn-open-feature {
+        width: 100%;
+    }
+
+    .top-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: auto;
+        overflow-y: visible;
+    }
+
+    .top-item {
+        width: 100%;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    .top-item-name {
+        font-size: 10pt;
+        white-space: normal;
+        max-width: 65%;
+    }
+
+    .top-item-qty {
+        font-size: 10pt;
+    }
+
+    .feature-modal-box {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .feature-checkbox-item {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .custom-date-filter {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

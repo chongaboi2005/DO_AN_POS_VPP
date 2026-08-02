@@ -1,0 +1,218 @@
+.order-mgmt-container {
+    padding: 30px 0;
+    background: #f3f4f6;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.order-mgmt-title {
+    color: #1e3a8a;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20pt;
+    margin-left: 20px;
+}
+
+.order-table-wrapper {
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table th {
+    background-color: #f9fafb;
+    color: #4b5563;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.order-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.order-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.badge-type-online {
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.badge-type-offline {
+    background: #fef3c7;
+    color: #b45309;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.badge-status-pending {
+    color: #d97706;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.badge-status-completed {
+    color: #10b981;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.btn-confirm-order {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 11pt;
+}
+
+.btn-confirm-order:hover {
+    background: #1e3a8a;
+}
+
+.btn-disabled {
+    background: #d1d5db;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: not-allowed;
+    font-size: 11pt;
+}
+
+.empty-order-msg {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 12pt;
+    font-style: italic;
+}
+
+.col-order-id {
+    font-weight: bold;
+    text-align: center;
+    font-size: 11pt;
+}
+
+.col-customer-name {
+    font-weight: bold;
+    color: #1f2937;
+    font-size: 11pt;
+}
+
+.col-customer-sub {
+    font-size: 10pt;
+    color: #6b7280;
+}
+
+.col-contact-info {
+    font-size: 10pt;
+    color: #4b5563;
+}
+
+.badge-status-cancelled {
+    color: #ef4444;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn-cancel-order {
+    background: #ef4444;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 11pt;
+}
+
+.btn-cancel-order:hover {
+    background: #b91c1c;
+}
+
+.badge-status-confirmed {
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.btn-complete-order {
+    background: #10b981;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 11pt;
+}
+
+.btn-complete-order:hover {
+    background: #059669;
+}
+
+/*TỐI ƯU HÓA CHO THIẾT BỊ*/
+@media (max-width: 1080px) {
+    .order-mgmt-container {
+        padding: 15px 5px;
+    }
+
+    .order-mgmt-title {
+        font-size: 18pt;
+        margin-left: 10px;
+        margin-bottom: 15px;
+    }
+
+    .col-order-id,
+    .col-customer-name,
+    .badge-status-cancelled {
+        font-size: 10pt;
+    }
+
+    .col-customer-sub,
+    .col-contact-info {
+        font-size: 9pt;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .btn-complete-order,
+    .btn-cancel-order,
+    .btn-disabled {
+        width: 100%;
+        font-size: 10pt;
+        padding: 8px 10px;
+    }
+}

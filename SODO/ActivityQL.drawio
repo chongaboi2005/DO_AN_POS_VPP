@@ -1,0 +1,100 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Trang-1" id="VxDwxnsq4XDjUBWOLnwv">
+    <mxGraphModel dx="985" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-1" parent="1" style="html=1;shape=mxgraph.sysml.actFinal;strokeWidth=2;verticalLabelPosition=bottom;verticalAlignment=top;fontSize=14;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="400" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=14;" value="Quản lý cửa hàng" vertex="1">
+          <mxGeometry height="30" width="120" x="360" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-3" parent="1" style="shape=rect;html=1;rounded=1;whiteSpace=wrap;align=center;fontSize=14;" value="Đăng nhập" vertex="1">
+          <mxGeometry height="40" width="120" x="360" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-4" parent="1" style="shape=rhombus;html=1;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlignment=top;fontSize=14;" value="" vertex="1">
+          <mxGeometry height="80" width="200" x="320" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=14;" value="Lựa chọn nghiệp vụ?" vertex="1">
+          <mxGeometry height="30" width="160" x="340" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-10" parent="1" style="shape=rect;html=1;rounded=1;whiteSpace=wrap;align=center;fontSize=14;" value="Quản lý sản phẩm và Marketing" vertex="1">
+          <mxGeometry height="40" width="220" x="310" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-11" parent="1" style="shape=rect;html=1;rounded=1;whiteSpace=wrap;align=center;fontSize=14;" value="Quản lý nhân viên" vertex="1">
+          <mxGeometry height="40" width="140" x="600" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-13" parent="1" style="shape=rect;html=1;rounded=1;whiteSpace=wrap;align=center;fontSize=14;" value="Xem biểu đồ thống kê" vertex="1">
+          <mxGeometry height="40" width="160" x="80" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-14" parent="1" style="shape=ellipse;html=1;fillColor=strokeColor;strokeWidth=2;verticalLabelPosition=bottom;verticalAlignment=top;perimeter=ellipsePerimeter;fontSize=14;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="400" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=14;" value="Kết thúc" vertex="1">
+          <mxGeometry height="30" width="60" x="390" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-17" edge="1" parent="1" source="rTOMgMe5MY-D-JPGP_28-3" style="endArrow=classic;html=1;rounded=0;" target="rTOMgMe5MY-D-JPGP_28-4" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="300" as="sourcePoint" />
+            <mxPoint x="190" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-20" edge="1" parent="1" source="rTOMgMe5MY-D-JPGP_28-14" style="endArrow=classic;html=1;rounded=0;" target="rTOMgMe5MY-D-JPGP_28-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="500" y="80" as="sourcePoint" />
+            <mxPoint x="330" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-24" edge="1" parent="1" source="rTOMgMe5MY-D-JPGP_28-4" style="endArrow=classic;html=1;rounded=0;" target="rTOMgMe5MY-D-JPGP_28-11" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="670" y="240" />
+            </Array>
+            <mxPoint x="430" y="300" as="sourcePoint" />
+            <mxPoint x="480" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-25" edge="1" parent="1" source="rTOMgMe5MY-D-JPGP_28-4" style="endArrow=classic;html=1;rounded=0;" target="rTOMgMe5MY-D-JPGP_28-13" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="240" />
+            </Array>
+            <mxPoint x="190" y="270" as="sourcePoint" />
+            <mxPoint x="240" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-26" edge="1" parent="1" source="rTOMgMe5MY-D-JPGP_28-4" style="endArrow=classic;html=1;rounded=0;" target="rTOMgMe5MY-D-JPGP_28-10" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="600" y="200" as="sourcePoint" />
+            <mxPoint x="650" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-27" edge="1" parent="1" source="rTOMgMe5MY-D-JPGP_28-10" style="endArrow=classic;html=1;rounded=0;" target="rTOMgMe5MY-D-JPGP_28-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="430" y="300" as="sourcePoint" />
+            <mxPoint x="410" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-28" edge="1" parent="1" source="rTOMgMe5MY-D-JPGP_28-13" style="endArrow=classic;html=1;rounded=0;" target="rTOMgMe5MY-D-JPGP_28-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="420" />
+            </Array>
+            <mxPoint x="200" y="180" as="sourcePoint" />
+            <mxPoint x="360" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rTOMgMe5MY-D-JPGP_28-29" edge="1" parent="1" source="rTOMgMe5MY-D-JPGP_28-11" style="endArrow=classic;html=1;rounded=0;" target="rTOMgMe5MY-D-JPGP_28-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="670" y="420" />
+            </Array>
+            <mxPoint x="560" y="220" as="sourcePoint" />
+            <mxPoint x="470" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

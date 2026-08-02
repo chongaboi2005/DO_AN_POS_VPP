@@ -1,0 +1,127 @@
+.login-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #f9fafb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.login-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px #d1d5db;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-title {
+    text-align: center;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.login-input {
+    padding: 12px 16px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 12pt;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.login-input:focus {
+    border-color: #2563eb;
+}
+
+.login-input.input-error {
+    border-color: #dc2626;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 11pt;
+    margin-left: 4px;
+}
+
+.login-submit-btn {
+    padding: 10px 15px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 13pt;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0;
+}
+
+.login-submit-btn:hover {
+    background-color: #1e3a8a;
+}
+
+.login-toggle-text {
+    text-align: center;
+    margin-top: 12px;
+    color: #4b5563;
+    font-size: 11pt;
+}
+
+.login-toggle-link {
+    color: #2563eb;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-back-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 11pt;
+}
+
+.login-back-link span {
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.login-back-link span:hover {
+    color: #4b5563;
+}
+
+.notification-box {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.notification-success {
+    color: #10b981;
+    background: transparent;
+    border: none;
+}
+
+.notification-error {
+    color: #ef4444;
+    background: transparent;
+    border: none;
+}

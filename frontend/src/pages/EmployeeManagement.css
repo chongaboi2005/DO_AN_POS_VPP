@@ -1,0 +1,364 @@
+.emp-container {
+    padding: 30px 0;
+    background: #f3f4f6;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.emp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.emp-title {
+    color: #1e3a8a;
+    margin: 0;
+    font-size: 20pt;
+}
+
+.emp-table-wrapper {
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.emp-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.emp-table th,
+.emp-table td {
+    padding: 15px 15px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.emp-table th {
+    background-color: #f9fafb;
+    color: #4b5563;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.emp-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 9pt;
+    font-weight: bold;
+}
+
+.status-active {
+    background-color: #d1fae5;
+    color: #047857;
+}
+
+.status-locked {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 10pt;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    color: white;
+}
+
+.btn-edit {
+    background: #3b82f6;
+}
+
+.btn-lock {
+    background-color: #f59e0b;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+}
+
+.btn-edit:hover {
+    background: #2563eb;
+}
+
+.btn-lock:hover {
+    background-color: #d97706;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+.emp-modal-box {
+    background: #ffffff;
+    width: 90%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.emp-modal-body {
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.emp-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 5px;
+}
+
+.emp-form-group label {
+    font-weight: bold;
+    font-size: 11pt;
+    color: #374151;
+}
+
+.emp-input {
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 11pt;
+    outline: none;
+}
+
+.emp-input:focus {
+    border-color: #2563eb;
+}
+
+.emp-input:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+    color: #6b7280;
+    font-weight: bold;
+    border-color: #e5e7eb;
+}
+
+.pwd-wrapper {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    transition: 0.2s;
+}
+
+.pwd-wrapper:focus-within {
+    border-color: #2563eb;
+}
+
+.pwd-wrapper .emp-input {
+    flex: 1;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+}
+
+.pwd-toggle {
+    position: static;
+    background: #f9fafb;
+    border: none;
+    border-left: 1px solid #d1d5db;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    transition: 0.2s;
+}
+
+.pwd-toggle:hover {
+    background: #e5e7eb;
+}
+
+.btn-timekeep {
+    background-color: #0891b2;
+    color: white;
+}
+
+.btn-timekeep:hover {
+    background-color: #0e7490;
+}
+
+.wage-cards {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.wage-card {
+    flex: 1;
+    background: linear-gradient(135deg, #22c55e, #166534);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.wage-card.week {
+    background: linear-gradient(135deg, #3b82f6, #1e40af);
+}
+
+.wage-card.month {
+    background: linear-gradient(135deg, #a855f7, #6b21a8);
+}
+
+.wage-card h4 {
+    margin: 0 0 5px 0;
+    font-size: 11pt;
+    opacity: 0.9;
+}
+
+.wage-card .amount {
+    font-size: 13pt;
+    font-weight: bold;
+    margin: 0;
+}
+
+.att-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11pt;
+    text-align: center;
+}
+
+.att-history-table th {
+    background: #f9fafb;
+    padding: 10px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.att-history-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.inline-att-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.att-btn-inline {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 10pt;
+    transition: 0.2s;
+}
+
+.att-btn-inline.checkin {
+    background: #10b981;
+}
+
+.att-btn-inline.checkin:hover {
+    background: #059669;
+}
+
+.att-btn-inline.chotca {
+    background: #3b82f6;
+    padding: 4px 12px;
+    margin-left: 5px;
+}
+
+.att-btn-inline.chotca:hover {
+    background: #2563eb;
+}
+
+.inline-select {
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    font-size: 9pt;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Tùy chỉnh thanh cuộn cho bảng chấm công để cột thẳng tắp */
+.scrollable-tbody {
+    max-height: 210px;
+    overflow-y: scroll;
+}
+
+
+/*TỐI ƯU HÓA CHO THIẾT BỊ*/
+@media (max-width: 1080px) {
+    .emp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+
+    .emp-title {
+        font-size: 18pt;
+    }
+
+    .emp-modal-body>div {
+        flex-direction: column;
+        gap: 10px !important;
+    }
+
+    .emp-input {
+        padding: 8px 12px;
+    }
+
+    .pwd-toggle {
+        padding: 0 10px;
+    }
+
+    .wage-cards {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .wage-card {
+        padding: 15px;
+    }
+
+    .wage-card h4 {
+        font-size: 12pt;
+    }
+
+    .wage-card .amount {
+        font-size: 15pt;
+    }
+
+    .att-history-table {
+        font-size: 10pt;
+    }
+
+    .att-history-table th,
+    .att-history-table td {
+        padding: 8px 5px;
+    }
+}

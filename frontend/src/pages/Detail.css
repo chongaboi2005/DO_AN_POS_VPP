@@ -1,0 +1,281 @@
+.product-detail-container {
+    display: flex;
+    gap: 40px;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+}
+
+/* 1. KHUNG HÌNH ẢNH: Bám sát mép trên */
+.product-detail-image-box {
+    flex: 1;
+    max-width: 500px;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Ảnh nằm trên cùng */
+    background-color: #ffffff;
+    align-self: flex-start; /* Khung ảnh không bị dãn dài theo chữ */
+}
+
+.product-detail-image-box img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+/* 2. KHUNG CHỮ: Bám sát mép trên */
+.product-detail-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Bắt đầu ngang hàng với ảnh */
+    min-width: 0;
+}
+
+.product-detail-title {
+    font-size: 24pt;
+    color: #1f2937;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.product-detail-price {
+    font-size: 28pt;
+    color: #dc2626;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed #e5e7eb;
+}
+
+.product-detail-desc {
+    flex: 1;
+    color: #4b5563;
+    font-size: 12pt;
+    line-height: 1.8;
+}
+
+.product-detail-desc h3 {
+    color: #1f2937;
+    font-size: 14pt;
+    margin-bottom: 10px;
+}
+
+.product-detail-add-btn {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 10px 0;
+    border-radius: 8px;
+    font-size: 13pt;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+}
+
+.product-detail-add-btn:hover {
+    background-color: #1e40af;
+}
+
+/* 3. LỚP ĐỊNH DẠNG VĂN BẢN CHUẨN (Fix đứt chữ & giữ nguyên dấu Enter) */
+.rich-text-description {
+    color: #4b5563;
+    font-size: 12pt;
+    line-height: 1.8;
+    
+    /* MẤU CHỐT: Không cắt ngang chữ (giáo vi-ên), ép rớt nguyên chữ xuống hàng */
+    word-break: normal !important; 
+    overflow-wrap: break-word !important; 
+    white-space: normal !important;
+}
+
+.rich-text-description p {
+    margin: 0 0 5px 0 !important; /* Giữ khoảng cách dòng tự nhiên khi bạn bấm Enter */
+}
+
+.rich-text-description strong,
+.rich-text-description b {
+    color: #1f2937;
+}
+
+/* Format cho danh sách gạch đầu dòng / số (nếu dùng) */
+.rich-text-description ul {
+    list-style-type: disc !important;
+    padding-left: 20px !important;
+    margin: 5px 0 !important;
+}
+
+.rich-text-description ol {
+    list-style-type: decimal !important;
+    padding-left: 20px !important;
+    margin: 5px 0 !important;
+}
+
+.rich-text-description li {
+    margin-bottom: 5px !important;
+}
+
+/* --- VOUCHER & BLOG CSS --- */
+.voucher-detail-container {
+    display: flex;
+    gap: 40px;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+}
+
+.voucher-detail-image-box {
+    flex: 1;
+    max-width: 500px;
+    background-color: #f8fafc;
+    border: 2px dashed #2563eb;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.voucher-detail-icon {
+    font-size: 100pt;
+    margin: 0;
+    line-height: 1;
+}
+
+.voucher-detail-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.voucher-detail-title {
+    color: #2563eb;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+.voucher-detail-code {
+    font-size: 24pt;
+    color: #dc2626;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.voucher-detail-desc {
+    flex: none;
+    margin-bottom: 30px;
+}
+
+.voucher-detail-desc p {
+    font-size: 13pt;
+    margin: 0 0 20px 0;
+    color: #374151;
+}
+
+.blog-article-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.blog-article-cover {
+    width: 100%;
+    max-height: 550px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.blog-article-title {
+    font-size: 24pt;
+    text-align: center;
+    color: #111827;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+}
+
+.blog-article-content {
+    font-size: 12pt;
+    color: #374151;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/*TỐI ƯU HÓA CHO THIẾT BỊ*/
+@media (max-width: 1080px) {
+    .product-detail-container {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .product-detail-image-box {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .product-detail-image-box img {
+        max-height: 300px;
+    }
+
+    .product-detail-title {
+        font-size: 18pt;
+        line-height: 1.3;
+    }
+
+    .product-detail-price {
+        font-size: 20pt;
+    }
+
+    .voucher-detail-container {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .voucher-detail-title {
+        font-size: 16pt;
+        margin-bottom: 10px;
+    }
+
+    .voucher-detail-code {
+        font-size: 20pt;
+        letter-spacing: 2px;
+    }
+
+    .voucher-detail-desc p {
+        font-size: 11pt;
+    }
+
+    .blog-article-wrapper {
+        padding: 0 10px;
+    }
+
+    .blog-article-cover {
+        max-height: 250px;
+        margin-bottom: 20px;
+    }
+
+    .blog-article-title {
+        font-size: 18pt;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+}

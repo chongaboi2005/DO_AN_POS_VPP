@@ -1,0 +1,66 @@
+.history-container {
+    padding: 30px 0;
+    background: #f3f4f6;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.history-title {
+    color: #1e3a8a;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20pt;
+    margin-left: 20px;
+}
+
+.history-search-bar {
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    margin-left: 20px;
+    background-color: #f3f4f6;
+}
+
+.history-table-wrapper {
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.history-table th {
+    background-color: #f9fafb;
+    color: #4b5563;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.history-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.history-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+/*TỐI ƯU HÓA CHO THIẾT BỊ*/
+@media (max-width: 1080px) {
+    .history-container {
+        padding: 15px 5px;
+    }
+
+    .history-title {
+        font-size: 18pt;
+        margin-left: 10px;
+        margin-bottom: 15px;
+    }
+}

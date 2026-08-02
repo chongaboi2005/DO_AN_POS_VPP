@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Trang-1" id="8aLVQmDMg9xvWA_Bxeb7">
+    <mxGraphModel dx="1812" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-1" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;size=80;fontSize=14;" value="" vertex="1">
+          <mxGeometry height="440" width="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=14;" value="Database" vertex="1">
+          <mxGeometry height="440" width="100" x="680" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=14;" value="Controller" vertex="1">
+          <mxGeometry height="440" width="100" x="400" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=14;" value="Boundary" vertex="1">
+          <mxGeometry height="440" width="100" x="190" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-5" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-4" value="1. Nhập thông tin phiếu nhập kho">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="140" />
+            </Array>
+            <mxPoint x="370" y="280" as="sourcePoint" />
+            <mxPoint x="450" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-6" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-4" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-3" value="2. Gửi yêu cầu nhập kho()">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="160" />
+            </Array>
+            <mxPoint x="370" y="280" as="sourcePoint" />
+            <mxPoint x="450" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=14;" value="Nhân viên kho" vertex="1">
+          <mxGeometry height="30" width="100" x="-30" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-8" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-3" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-2" value="3. Truy vấn kiểm tra sản phẩm()">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="180" />
+            </Array>
+            <mxPoint x="370" y="270" as="sourcePoint" />
+            <mxPoint x="450" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-9" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-2" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-3" value="4. Trả về kết quả kiểm tra">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="220" />
+            </Array>
+            <mxPoint x="450" y="270" as="sourcePoint" />
+            <mxPoint x="370" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-10" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=14;" value="Alt" vertex="1">
+          <mxGeometry height="220" width="800" x="-40" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-11" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=14;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-40" y="320" as="sourcePoint" />
+            <mxPoint x="760" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-12" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-3" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-4" value="5a. Trả về lỗi sai sản phẩm">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="280" />
+            </Array>
+            <mxPoint x="450" y="270" as="sourcePoint" />
+            <mxPoint x="370" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-13" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-4" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-1" value="6a. Trả về cảnh báo lỗi dữ liệu">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="300" />
+            </Array>
+            <mxPoint x="450" y="270" as="sourcePoint" />
+            <mxPoint x="370" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-14" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-3" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-2" value="5b. Lưu phiếu nhập và Cập nhật tồn kho()">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="360" />
+            </Array>
+            <mxPoint x="370" y="270" as="sourcePoint" />
+            <mxPoint x="450" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-15" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-2" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-3" value="6b. Trả về kết quả lưu thành công">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="400" />
+            </Array>
+            <mxPoint x="450" y="270" as="sourcePoint" />
+            <mxPoint x="370" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-16" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-3" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-4" value="7b. Trả về thông báo hoàn tất">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="420" />
+            </Array>
+            <mxPoint x="450" y="270" as="sourcePoint" />
+            <mxPoint x="370" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-17" edge="1" parent="1" source="1UVag_4WQxvovD4Cm-A3-4" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=14;" target="1UVag_4WQxvovD4Cm-A3-1" value="8b. Trả về nhập kho thành công">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="440" />
+            </Array>
+            <mxPoint x="450" y="270" as="sourcePoint" />
+            <mxPoint x="370" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-18" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=14;" value="[Sản phẩm không hợp lệ]" vertex="1">
+          <mxGeometry height="30" width="170" x="20" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="1UVag_4WQxvovD4Cm-A3-19" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=14;" value="[Sản phẩm hợp lệ]" vertex="1">
+          <mxGeometry height="30" width="130" x="-40" y="320" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
