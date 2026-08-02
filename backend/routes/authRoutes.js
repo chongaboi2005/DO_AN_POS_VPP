@@ -34,11 +34,11 @@ module.exports = function (app, db, nodemailer, io) {
         });
     });
     app.post('/api/forgot-password', (req, res) => {
+        const { email } = req.body;
         const emailRegex = /^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (email && !emailRegex.test(email)) {
             return res.status(400).json({ error: "Email sai định dạng!" });
         }
-        const { email } = req.body;
         db.query("SELECT * FROM users WHERE email = ?", [email], (err, users) => {
             if (err) return res.status(500).json({ error: "Lỗi máy chủ!" });
             if (users.length === 0) return res.status(404).json({ error: "Email chưa đăng ký trong hệ thống!" });
@@ -54,19 +54,40 @@ module.exports = function (app, db, nodemailer, io) {
                     }
                 });
                 const mailOptions = {
-                    from: 'QUEEN STATIONERY',
+                    from: '"Hệ thống QUEEN STATIONERY" <no-reply@queenstationery.com>',
                     to: email,
                     subject: 'Khôi phục mật khẩu tài khoản QUEEN STATIONERY',
                     html: `
-                        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; border: 1px solid #ddd; border-radius: 10px;">
-                            <h2 style="color: #2563eb; text-align: center;">QUEEN STATIONERY</h2>
-                            <p>Chào bạn,</p>
-                            <p>Hệ thống vừa nhận được yêu cầu khôi phục thông tin đăng nhập từ email này.</p>
-                            <p>Tên tài khoản của bạn là: <b>${username}</b></p>
-                            <p>Mật khẩu mới của bạn là: <strong style="color: red; font-size: 16px; padding: 5px 10px; background: #fef2f2; border-radius: 5px;">${newPassword}</strong></p>
-                            <p>Vui lòng sử dụng thông tin trên để đăng nhập nhé!</p>
-                            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-                            <p style="font-size: 12px; color: #888; text-align: center;">Đây là email tự động, vui lòng không trả lời.</p>
+                        <div style="font-family: 'Segoe UI', Arial, sans-serif; padding: 30px; max-width: 600px; margin: auto; border: 1px solid #e5e7eb; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <h2 style="color: #1e3a8a; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px;">QUEEN STATIONERY</h2>
+                                <p style="color: #6b7280; font-size: 14px; margin-top: 5px;">Hệ thống mua sắm văn phòng phẩm trực tuyến</p>
+                            </div>
+                            
+                            <hr style="border: 0; border-top: 2px solid #eff6ff; margin: 20px 0;">
+                            
+                            <p style="font-size: 16px; color: #374151;">Kính chào Quý khách,</p>
+                            <p style="font-size: 15px; color: #4b5563; line-height: 1.6;">Chúng tôi vừa nhận được yêu cầu khôi phục mật khẩu cho tài khoản liên kết với địa chỉ email này. Dưới đây là thông tin đăng nhập mới của Quý khách:</p>
+                            
+                            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #2563eb;">
+                                <p style="margin: 0 0 12px 0; font-size: 15px; color: #4b5563;">Tên đăng nhập: <strong style="color: #1e3a8a; font-size: 16px;">${username}</strong></p>
+                                <p style="margin: 0; font-size: 15px; color: #4b5563;">Mật khẩu mới: <strong style="color: #dc2626; font-size: 18px; padding: 4px 10px; background: #fee2e2; border-radius: 4px; letter-spacing: 2px;">${newPassword}</strong></p>
+                            </div>
+
+                            <p style="font-size: 15px; color: #4b5563; line-height: 1.6;">
+                                <span style="font-size: 16px;">⚠️</span> <strong>Lưu ý bảo mật:</strong> Để đảm bảo an toàn, Quý khách vui lòng tiến hành <strong>đổi lại mật khẩu cá nhân</strong> ngay sau khi đăng nhập thành công.
+                            </p>
+                            
+                            <p style="font-size: 14px; color: #6b7280; line-height: 1.6; margin-top: 20px;">
+                                Nếu Quý khách không thực hiện yêu cầu này, vui lòng bỏ qua email hoặc liên hệ trực tiếp qua Hotline <strong>(+8428) 39733381</strong> để được hỗ trợ.
+                            </p>
+                            
+                            <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 30px 0 20px 0;">
+                            
+                            <div style="text-align: center; font-size: 13px; color: #9ca3af; line-height: 1.5;">
+                                <p style="margin: 0 0 5px 0;">Đây là email gửi tự động từ hệ thống, Quý khách vui lòng không phản hồi email này.</p>
+                                <p style="margin: 0;">Trân trọng, <strong>Đội ngũ QUEEN STATIONERY</strong>.</p>
+                            </div>
                         </div>
                     `
                 };

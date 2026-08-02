@@ -440,7 +440,7 @@ export default function Cart() {
                                         <div className="summary-row" style={{ marginBottom: '4px', fontSize: '11pt' }}>
                                             <span>
                                                 Phí vận chuyển:
-                                                {shippingFee === 50000 && <span style={{ fontSize: '9pt', color: '#d97706', display: 'block', fontStyle: 'italic' }}>(Phụ thu ngoại tỉnh)</span>}
+                                                {shippingFee === 50000 && <span style={{ fontSize: '9pt', color: '#d97706', display: 'block', fontStyle: 'italic' }}>(Phụ thu ngoại thành)</span>}
                                             </span>
                                             <span style={{ color: '#4b5563' }}>
                                                 {Number(shippingFee).toLocaleString('vi-VN')}đ

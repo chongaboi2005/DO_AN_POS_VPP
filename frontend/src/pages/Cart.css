@@ -17,12 +17,12 @@
 .cart-summary {
     flex: 1;
     background-color: #f9fafb;
-    padding: 24px;
+    padding: 10px 15px;
     border-radius: 12px;
     height: fit-content;
     border: 1px solid #e5e7eb;
     position: sticky;
-    top: 100px;
+    top: 20px;
 }
 
 .cart-item {
@@ -216,7 +216,7 @@
     align-items: center;
     justify-content: center;
     gap: 400px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid #e5e7eb;
 }
@@ -322,17 +322,6 @@
 .qty-number-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-.cart-summary {
-    flex: 1;
-    background-color: #f9fafb;
-    padding: 15px;
-    border-radius: 12px;
-    height: fit-content;
-    border: 1px solid #e5e7eb;
-    position: sticky;
-    top: 20px;
 }
 
 .checkout-input {
