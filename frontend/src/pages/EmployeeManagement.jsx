@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './EmployeeManagement.css';
+import * as XLSX from 'xlsx';
 
 export default function EmployeeManagement() {
     const [employees, setEmployees] = useState([]);
@@ -71,7 +72,7 @@ export default function EmployeeManagement() {
         }
         if (!isEdit) {
             if (!formData.username || !formData.password || !formData.display_name || !formData.role || !formData.gender || !formData.date_of_birth || !formData.phone || !formData.country) {
-                return showToast("Vui lòng điền đầy đủ các thông tin", "error");
+                return showToast("Vui lòng điền đầy đủ các thông định", "error");
             }
             if (formData.password.length < 8) return showToast("Mật khẩu phải từ 8 ký tự!", "error");
         } else {
@@ -153,6 +154,53 @@ export default function EmployeeManagement() {
     const formatTime = (isoString) => {
         if (!isoString) return '--:--';
         return new Date(isoString).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false });
+    };
+
+    const handleExportExcel = () => {
+        if (!selectedEmp || !attData || !attData.history) return;
+        const summaryArray = [
+            ["THÔNG TIN CÁ NHÂN", ""],
+            ["Họ và tên nhân viên:", selectedEmp.display_name],
+            ["Tên tài khoản:", selectedEmp.username],
+            ["Chức vụ:", selectedEmp.role === 'cashier' ? 'Thu ngân' : 'Thủ kho'],
+            ["", ""],
+            ["TỔNG KẾT TIỀN LƯƠNG", ""],
+            ["Thu nhập hôm nay (VNĐ):", attData.stats.day_total || 0],
+            ["Thu nhập tuần này (VNĐ):", attData.stats.week_total || 0],
+            ["Thu nhập tháng này (VNĐ):", attData.stats.month_total || 0]
+        ];
+
+        const historyData = attData.history.map((row, index) => {
+            let statusText = '';
+            if (row.shift_status === 'working') statusText = 'Đang làm...';
+            else if (row.shift_status === 'full') statusText = 'Đủ ca';
+            else if (row.shift_status === 'half') statusText = 'Nửa ca';
+            else statusText = 'Tự ý nghỉ';
+
+            return {
+                "STT": index + 1,
+                "Ngày làm việc": new Date(row.work_date).toLocaleDateString('vi-VN'),
+                "Giờ vào ca": formatTime(row.check_in),
+                "Giờ ra ca": formatTime(row.check_out),
+                "Phân loại ca": statusText,
+                "Tiền lương nhận được (VNĐ)": row.daily_wage || 0
+            };
+        });
+
+        const wb = XLSX.utils.book_new();
+        const wsSummary = XLSX.utils.aoa_to_sheet(summaryArray);
+        const wsHistory = XLSX.utils.json_to_sheet(historyData);
+
+        wsSummary['!cols'] = [{ wch: 30 }, { wch: 25 }];
+        wsHistory['!cols'] = [{ wch: 5 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 25 }];
+
+        XLSX.utils.book_append_sheet(wb, wsSummary, "Tổng Quan Lương");
+        XLSX.utils.book_append_sheet(wb, wsHistory, "Lịch Sử Chấm Công");
+
+        const dateStr = new Date().toLocaleDateString('vi-VN').replace(/\//g, '-');
+        XLSX.writeFile(wb, `Bang_Luong_${selectedEmp.username}_${dateStr}.xlsx`);
+
+        showToast(`Đã xuất bảng lương của ${selectedEmp.display_name}!`, "success");
     };
 
     return (
@@ -342,16 +390,16 @@ export default function EmployeeManagement() {
                                     </div>
                                     <div className="emp-form-group">
                                         <label>Email cá nhân</label>
-                                        <input 
-                                            type="text" 
-                                            className="emp-input" 
-                                            placeholder="Ví dụ: nguyenvana@gmail.com" 
-                                            value={formData.email} 
+                                        <input
+                                            type="text"
+                                            className="emp-input"
+                                            placeholder="Ví dụ: nguyenvana@gmail.com"
+                                            value={formData.email}
                                             style={emailError ? { borderColor: '#ef4444', backgroundColor: '#fef2f2' } : {}}
-                                            onChange={e => { 
-                                                setFormData({ ...formData, email: e.target.value }); 
+                                            onChange={e => {
+                                                setFormData({ ...formData, email: e.target.value });
                                                 setEmailError('');
-                                            }} 
+                                            }}
                                         />
                                         {emailError && <span style={{ color: '#ef4444', fontSize: '9pt', fontWeight: 'bold' }}>{emailError}</span>}
                                     </div>
@@ -390,7 +438,13 @@ export default function EmployeeManagement() {
                                 </div>
                             </div>
 
-                            <h4 style={{ marginBottom: '10px', color: '#374151' }}>Lịch sử làm việc</h4>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <h4 style={{ margin: 0, color: '#374151' }}>Lịch sử làm việc</h4>
+                                <button className="global-btn-add" style={{ marginRight: '0' }} onClick={handleExportExcel}>
+                                    Xuất Excel
+                                </button>
+                            </div>
+
                             <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', overflow: 'hidden' }}>
                                 <table className="att-history-table" style={{ tableLayout: 'fixed', marginBottom: 0 }}>
                                     <thead>
@@ -423,6 +477,7 @@ export default function EmployeeManagement() {
                                 </div>
                             </div>
                         </div>
+
                         <div className="global-modal-footer">
                             <button className="global-btn-cancel" onClick={() => setIsAttModalOpen(false)}>Đóng</button>
                         </div>

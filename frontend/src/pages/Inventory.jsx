@@ -161,11 +161,11 @@ export default function Inventory() {
         <div className="inventory-container">
             {toast && <div className={"global-toast toast-" + toast.type}>{toast.message}</div>}
 
-            <div className="inventory-header">
+            <div className="inventory-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <h2 className="inventory-title">Quản lý Sản phẩm</h2>
                 <div className="header-actions">
                     {role === 'admin' && (
-                        <button className="global-btn-add" onClick={() => handleOpenModal()}>+ Thêm Sản Phẩm Mới</button>
+                        <button className="global-btn-add" style={{marginRight: '10px'}} onClick={() => handleOpenModal()}>+ Thêm Sản Phẩm Mới</button>
                     )}
                 </div>
             </div>

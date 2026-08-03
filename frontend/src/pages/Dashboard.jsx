@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
+import * as XLSX from 'xlsx';
 
 export default function Dashboard() {
     const [orders, setOrders] = useState([]);
@@ -150,36 +151,40 @@ export default function Dashboard() {
         } else if (timeRange === 'custom' && startDate && endDate) {
             let startMs = new Date(startDate).setHours(0, 0, 0, 0);
             let endMs = new Date(endDate).setHours(23, 59, 59, 999);
-            
-            // Đảo lại nếu người dùng vô tình chọn ngày bắt đầu lớn hơn ngày kết thúc
+
             if (startMs > endMs) {
                 const temp = startMs; startMs = endMs; endMs = temp;
             }
 
-            // TÍNH TOÁN THEO LỊCH CHUẨN (Mỗi ngày là 1 cột)
-            const startDay0h = new Date(startDate).setHours(0, 0, 0, 0);
-            const endDay0h = new Date(endDate).setHours(0, 0, 0, 0);
-            // Tính tổng số ngày chính xác (bao gồm cả ngày đầu và cuối)
+            const startDay0h = new Date(startMs).setHours(0, 0, 0, 0);
+            const endDay0h = new Date(endMs).setHours(0, 0, 0, 0);
+
             const totalDays = Math.round((endDay0h - startDay0h) / (1000 * 60 * 60 * 24)) + 1;
-            
-            // Cho phép hiển thị tối đa 15 cột (nửa tháng) để biểu đồ giữ được độ chi tiết và đẹp nhất
-            const pointsCount = totalDays <= 15 ? totalDays : 15;
+
+            const pointsCount = totalDays <= 10 ? totalDays : 10;
 
             const labels = [];
             const values = Array(pointsCount).fill(0);
+            const buckets = [];
 
-            // Khởi tạo nhãn (labels) cho từng cột
+            const step = totalDays / pointsCount;
+
             for (let i = 0; i < pointsCount; i++) {
-                let labelTime;
-                if (totalDays <= 15) {
-                    // Nếu <= 15 ngày, mỗi ngày là 1 cột chính xác
-                    labelTime = startDay0h + (i * 24 * 60 * 60 * 1000);
-                } else {
-                    // Nếu > 15 ngày, chia đều khoảng cách
-                    const step = totalDays / pointsCount;
-                    labelTime = startDay0h + Math.floor(i * step) * 24 * 60 * 60 * 1000;
-                }
-                labels.push(new Date(labelTime).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' }));
+                const startOffset = Math.floor(i * step);
+                const endOffset = i === pointsCount - 1 ? totalDays - 1 : Math.floor((i + 1) * step) - 1;
+
+                const bStartMs = startDay0h + (startOffset * 24 * 60 * 60 * 1000);
+                const bEndMs = startDay0h + (endOffset * 24 * 60 * 60 * 1000);
+
+                const fStart = new Date(bStartMs).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' });
+                const fEnd = new Date(bEndMs).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' });
+
+                labels.push(fStart === fEnd ? fStart : `${fStart} - ${fEnd}`);
+
+                buckets.push({
+                    start: bStartMs,
+                    end: bEndMs + (23 * 3600 * 1000 + 59 * 60 * 1000 + 59000 + 999)
+                });
             }
 
             orders.filter(o => {
@@ -187,26 +192,13 @@ export default function Dashboard() {
                 return ms >= startMs && ms <= endMs;
             }).forEach(o => {
                 const ms = safeParseDate(o.created_at);
-                const msDay0h = new Date(ms).setHours(0, 0, 0, 0);
-                
-                // Tính xem đơn hàng này cách ngày bắt đầu bao nhiêu ngày
-                const diffDays = Math.round((msDay0h - startDay0h) / (1000 * 60 * 60 * 24));
-                
-                let index = 0;
-                if (totalDays <= 15) {
-                    // Phân bổ chính xác tuyệt đối vào ngày đó
-                    index = diffDays;
-                } else {
-                    // Phân bổ vào nhóm nếu khoảng thời gian quá dài
-                    const step = totalDays / pointsCount;
-                    index = Math.floor(diffDays / step);
+
+                for (let i = 0; i < buckets.length; i++) {
+                    if (ms >= buckets[i].start && ms <= buckets[i].end) {
+                        values[i] += Number(o.final_total || 0);
+                        break;
+                    }
                 }
-                
-                // Đảm bảo không bị văng ra khỏi mảng
-                if (index >= pointsCount) index = pointsCount - 1;
-                if (index < 0) index = 0;
-                
-                values[index] += Number(o.final_total || 0);
             });
 
             data = labels.map((l, i) => ({ label: l, value: values[i] }));
@@ -241,6 +233,75 @@ export default function Dashboard() {
         yTicks.push((maxChartValue / 5) * i);
     }
 
+    const handleExportExcel = () => {
+        const summaryData = [
+            { "Thời gian": "Trong ngày", "Doanh thu (VNĐ)": statsDay.rev, "Số lượng đã bán": statsDay.qty, "Số đơn đặt hàng": statsDay.orderCount },
+            { "Thời gian": "Trong tuần", "Doanh thu (VNĐ)": statsWeek.rev, "Số lượng đã bán": statsWeek.qty, "Số đơn đặt hàng": statsWeek.orderCount },
+            { "Thời gian": "Trong tháng", "Doanh thu (VNĐ)": statsMonth.rev, "Số lượng đã bán": statsMonth.qty, "Số đơn đặt hàng": statsMonth.orderCount },
+            { "Thời gian": "Trong năm", "Doanh thu (VNĐ)": statsYear.rev, "Số lượng đã bán": statsYear.qty, "Số đơn đặt hàng": statsYear.orderCount }
+        ];
+
+        let revenueData = [];
+
+        if (timeRange === 'custom' && startDate && endDate) {
+            let startMs = new Date(startDate).setHours(0, 0, 0, 0);
+            let endMs = new Date(endDate).setHours(23, 59, 59, 999);
+
+            if (startMs > endMs) {
+                const temp = startMs; startMs = endMs; endMs = temp;
+            }
+
+            const startDay0h = new Date(startMs).setHours(0, 0, 0, 0);
+            const totalDays = Math.round((new Date(endMs).setHours(0, 0, 0, 0) - startDay0h) / (1000 * 60 * 60 * 24)) + 1;
+
+            for (let i = 0; i < totalDays; i++) {
+                const currentDayMs = startDay0h + (i * 24 * 60 * 60 * 1000);
+                const currentDayEndMs = currentDayMs + (24 * 60 * 60 * 1000) - 1;
+
+                const dailyTotal = orders
+                    .filter(o => {
+                        const ms = safeParseDate(o.created_at);
+                        return ms >= currentDayMs && ms <= currentDayEndMs;
+                    })
+                    .reduce((sum, o) => sum + Number(o.final_total || 0), 0);
+
+                revenueData.push({
+                    "Thời điểm ghi nhận": new Date(currentDayMs).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+                    "Doanh thu (VNĐ)": dailyTotal
+                });
+            }
+        } else {
+            revenueData = chartData.map(item => ({
+                "Thời điểm ghi nhận": item.label,
+                "Doanh thu (VNĐ)": item.value
+            }));
+        }
+
+        const topProductsData = topProducts.map((prod, index) => ({
+            "Thứ hạng": `Top ${index + 1}`,
+            "Tên sản phẩm": prod.name,
+            "Số lượng đã bán": prod.qty
+        }));
+
+        const wb = XLSX.utils.book_new();
+        const wsSummary = XLSX.utils.json_to_sheet(summaryData);
+        const wsRevenue = XLSX.utils.json_to_sheet(revenueData);
+        const wsTopProducts = XLSX.utils.json_to_sheet(topProductsData);
+
+        wsSummary['!cols'] = [{ wch: 15 }, { wch: 20 }, { wch: 20 }, { wch: 15 }];
+        wsRevenue['!cols'] = [{ wch: 25 }, { wch: 20 }];
+        wsTopProducts['!cols'] = [{ wch: 15 }, { wch: 100 }, { wch: 20 }];
+
+        XLSX.utils.book_append_sheet(wb, wsSummary, "Tổng Quan");
+        XLSX.utils.book_append_sheet(wb, wsRevenue, "Chi Tiết Doanh Thu");
+        XLSX.utils.book_append_sheet(wb, wsTopProducts, "Top Sản Phẩm");
+
+        const dateStr = new Date().toLocaleDateString('vi-VN').replace(/\//g, '-');
+        XLSX.writeFile(wb, `Bao_Cao_Doanh_Thu_QueenStationery_${dateStr}.xlsx`);
+
+        showToast("Đã xuất file Excel thành công!", "success");
+    };
+
     const points = chartData.map((d, i) => {
         const x = padding.left + (i * (chartW / Math.max(chartData.length - 1, 1)));
         const visualValue = Math.min(d.value, maxChartValue);
@@ -248,6 +309,7 @@ export default function Dashboard() {
 
         return { x, y, label: d.label, value: d.value };
     });
+
     let linePath = '';
     let areaPath = '';
 
@@ -287,8 +349,11 @@ export default function Dashboard() {
         <div className="dash-container">
             {toast && <div className={"global-toast toast-" + toast.type}>{toast.message}</div>}
 
-            <div className="dash-header">
+            <div className="dash-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <h2 className="dash-title">Thống kê Doanh thu</h2>
+                <button className="global-btn-add" style={{ marginRight: '3px' }} onClick={handleExportExcel}>
+                    <span>Xuất Excel báo cáo</span>
+                </button>
             </div>
 
             <div className="dash-summary-grid">
@@ -371,11 +436,29 @@ export default function Dashboard() {
                             <line x1={padding.left} y1={svgHeight - padding.bottom} x2={svgWidth - padding.right} y2={svgHeight - padding.bottom} stroke="#9ca3af" strokeWidth="2" />
                             <line x1={padding.left} y1={padding.top} x2={padding.left} y2={svgHeight - padding.bottom} stroke="#9ca3af" strokeWidth="2" />
 
-                            {points.map((p, i) => (
-                                <text key={i} x={p.x} y={svgHeight - 15} fill="#6b7280" fontSize="11" fontWeight="bold" textAnchor="middle">
-                                    {p.label}
-                                </text>
-                            ))}
+                            {points.map((p, i) => {
+                                const totalPoints = points.length;
+                                let showLabel = false;
+
+                                if (totalPoints <= 12) {
+                                    showLabel = true;
+                                } else {
+                                    const step = Math.ceil(totalPoints / 10);
+                                    if (i === 0 || i === totalPoints - 1) {
+                                        showLabel = true;
+                                    } else if (i % step === 0 && (totalPoints - 1 - i) > Math.floor(step * 0.7)) {
+                                        showLabel = true;
+                                    }
+                                }
+
+                                if (!showLabel) return null;
+
+                                return (
+                                    <text key={`label-${i}`} x={p.x} y={svgHeight - 15} fill="#6b7280" fontSize="11" fontWeight="bold" textAnchor="middle">
+                                        {p.label}
+                                    </text>
+                                );
+                            })}
 
                             {areaPath && (
                                 <path d={areaPath} fill="url(#colorRevenue)" style={{ pointerEvents: 'none', transition: 'all 0.3s ease' }} />

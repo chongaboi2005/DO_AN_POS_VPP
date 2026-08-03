@@ -205,7 +205,7 @@
 .wage-cards {
     display: flex;
     gap: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .wage-card {
@@ -302,12 +302,10 @@
     cursor: pointer;
 }
 
-/* Tùy chỉnh thanh cuộn cho bảng chấm công để cột thẳng tắp */
 .scrollable-tbody {
     max-height: 210px;
     overflow-y: scroll;
 }
-
 
 /*TỐI ƯU HÓA CHO THIẾT BỊ*/
 @media (max-width: 1080px) {

@@ -161,7 +161,7 @@ export default function VoucherBlogManagement() {
 
             <div className="vm-header">
                 <h2 className="vm-title">Quản lý Khuyến mãi & Blog</h2>
-                <button className="global-btn-add" onClick={() => activeTab === 'blog' ? handleOpenCreateBlog() : handleOpenCreateVoucher()}>
+                <button className="global-btn-add" style={{marginRight: '15px'}} onClick={() => activeTab === 'blog' ? handleOpenCreateBlog() : handleOpenCreateVoucher()}>
                     {activeTab === 'blog' ? '+ Thêm mới' : '+ Thêm mới'}
                 </button>
             </div>
