@@ -89,15 +89,28 @@ export default function POS() {
                         const foundProduct = products.find(p => p.barcode === decodedText);
 
                         if (foundProduct) {
-                            const msg = `Đã thêm: ${foundProduct.name}`;
-                            showToast(msg, 'success');
+                            if (foundProduct.stock <= 0) {
+                                showToast(`Sản phẩm "${foundProduct.name}" đã hết hàng!`, 'error');
+                                return;
+                            }
 
                             setPosCart(prev => {
                                 const exists = prev.find(item => item.id === foundProduct.id);
+                                const currentQty = exists ? exists.qty : 0;
+
+                                if (currentQty >= foundProduct.stock) {
+                                    const msg = `Chỉ còn ${foundProduct.stock} sản phẩm!`;
+                                    showToast(msg, 'error');
+                                    if (window.posSocket) window.posSocket.emit('update_cart', { cart: prev, message: msg, type: 'error' });
+                                    return prev;
+                                }
+
                                 const newCart = exists
                                     ? prev.map(item => item.id === foundProduct.id ? { ...item, qty: item.qty + 1 } : item)
                                     : [...prev, { ...foundProduct, qty: 1 }];
 
+                                const msg = `Đã thêm: ${foundProduct.name}`;
+                                showToast(msg, 'success');
                                 if (window.posSocket) window.posSocket.emit('update_cart', { cart: newCart, message: msg, type: 'success' });
                                 return newCart;
                             });
@@ -191,8 +204,20 @@ export default function POS() {
     };
 
     const addToPosCart = (product) => {
+        if (product.stock <= 0) {
+            showToast(`Sản phẩm "${product.name}" đã hết hàng!`, 'error');
+            return;
+        }
+
         setPosCart(prev => {
             const exists = prev.find(item => item.id === product.id);
+            const currentQty = exists ? exists.qty : 0;
+
+            if (currentQty >= product.stock) {
+                showToast(`Chỉ còn ${product.stock} sản phẩm!`, 'error');
+                return prev;
+            }
+
             const newCart = exists
                 ? prev.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item)
                 : [...prev, { ...product, qty: 1 }];
@@ -204,9 +229,18 @@ export default function POS() {
 
     const updateQty = (id, delta) => {
         setPosCart(prev => {
+            const itemToUpdate = prev.find(item => item.id === id);
+            if (!itemToUpdate) return prev;
+
+            const newQty = (parseInt(itemToUpdate.qty) || 0) + delta;
+            
+            if (newQty > itemToUpdate.stock) {
+                showToast(`Chỉ còn ${itemToUpdate.stock} sản phẩm!`, 'error');
+                return prev;
+            }
+
             const newCart = prev.map(item => {
                 if (item.id === id) {
-                    const newQty = (parseInt(item.qty) || 0) + delta;
                     return newQty > 0 ? { ...item, qty: newQty } : item;
                 }
                 return item;
@@ -230,12 +264,21 @@ export default function POS() {
 
     const setExactQty = (id, newQtyStr) => {
         setPosCart(prev => {
+            const itemToUpdate = prev.find(item => item.id === id);
+            if (!itemToUpdate) return prev;
+
             let newCart;
             if (newQtyStr === '') {
                 newCart = prev.map(item => item.id === id ? { ...item, qty: '' } : item);
             } else {
-                const newQty = parseInt(newQtyStr);
+                let newQty = parseInt(newQtyStr);
                 if (isNaN(newQty) || newQty < 1) return prev;
+                
+                if (newQty > itemToUpdate.stock) {
+                    showToast(`Chỉ còn ${itemToUpdate.stock} sản phẩm!`, 'error');
+                    newQty = itemToUpdate.stock;
+                }
+                
                 newCart = prev.map(item => item.id === id ? { ...item, qty: newQty } : item);
             }
 
