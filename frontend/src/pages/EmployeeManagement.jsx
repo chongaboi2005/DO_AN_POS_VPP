@@ -10,6 +10,7 @@ export default function EmployeeManagement() {
     const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, usernameToDelete: null });
     const [toast, setToast] = useState(null);
     const [emailError, setEmailError] = useState('');
+    const [resetConfirmDialog, setResetConfirmDialog] = useState({ isOpen: false, username: null, displayName: null });
 
     const [formData, setFormData] = useState({
         display_name: '', username: '', password: '', role: '',
@@ -106,6 +107,26 @@ export default function EmployeeManagement() {
             });
             showToast(`Đã ${newStatus === 'locked' ? 'khóa' : 'mở khóa'} tài khoản!`, "success"); fetchEmployees();
         } catch (err) { }
+    };
+
+    const handleResetPasswordClick = (username, displayName) => {
+        setResetConfirmDialog({ isOpen: true, username, displayName });
+    };
+
+    const confirmResetPassword = async () => {
+        const { username, displayName } = resetConfirmDialog;
+        try {
+            const res = await fetch(`${API_BASE}/api/employees/${username}/reset-password`, { method: 'PUT' });
+            const data = await res.json();
+            if (res.ok) {
+                showToast(`Đã cấp lại mật khẩu cho ${displayName}!`, "success");
+            } else {
+                showToast(data.error || "Lỗi cấp lại mật khẩu!", "error");
+            }
+        } catch (err) {
+            showToast("Lỗi kết nối", "error");
+        }
+        setResetConfirmDialog({ isOpen: false, username: null, displayName: null });
     };
 
     const handleSelectChange = (username, value) => {
@@ -275,6 +296,7 @@ export default function EmployeeManagement() {
 
                                         {emp.role !== 'admin' && (
                                             <>
+                                                <button className="action-btn btn-reset-pwd" onClick={() => handleResetPasswordClick(emp.username, emp.display_name)}>Cấp MK</button>
                                                 <button className="action-btn btn-lock" onClick={() => handleLock(emp)}>
                                                     {emp.status === 'active' ? 'Khóa' : 'Mở'}
                                                 </button>
@@ -290,6 +312,20 @@ export default function EmployeeManagement() {
                     </tbody>
                 </table>
             </div>
+
+            {resetConfirmDialog.isOpen && (
+                <div className="global-modal-overlay" onClick={() => setResetConfirmDialog({ isOpen: false, username: null, displayName: null })}>
+                    <div className="global-confirm-modal" onClick={e => e.stopPropagation()}>
+                        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                            <h3 style={{ margin: '10px 0 5px 0', color: '#1f2937', fontSize: '13pt' }}>Cấp lại mật khẩu?</h3>
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                            <button className="confirm-btn-no" onClick={() => setResetConfirmDialog({ isOpen: false, username: null, displayName: null })}>Hủy</button>
+                            <button className="confirm-btn-yes" onClick={confirmResetPassword}>Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {isModalOpen && (
                 <div className="global-modal-overlay" onMouseDown={() => setIsModalOpen(false)}>

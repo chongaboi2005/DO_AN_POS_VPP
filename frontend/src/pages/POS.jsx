@@ -356,19 +356,25 @@ export default function POS() {
     const cartTotal = posCart.reduce((sum, item) => sum + item.price * (parseInt(item.qty) || 0), 0);
 
     useEffect(() => {
-        if (appliedVouchers.length > 0) {
-            const validVouchers = appliedVouchers.filter(code => {
-                const v = vouchers.find(dbV => dbV.code === code);
-                return checkVoucherEligibility(v, posCart);
-            });
-            if (validVouchers.length !== appliedVouchers.length) {
-                setAppliedVouchers(validVouchers);
-                showToast("Mã giảm bị loại bỏ do không đủ điều kiện!", "error");
+        if (vouchers.length > 0) {
+            const eligibleCodes = vouchers
+                .filter(v => v.type === 'pos' && checkVoucherEligibility(v, posCart))
+                .map(v => v.code);
+
+            const currentCodesStr = JSON.stringify([...appliedVouchers].sort());
+            const newCodesStr = JSON.stringify([...eligibleCodes].sort());
+
+            if (currentCodesStr !== newCodesStr) {
+                setAppliedVouchers(eligibleCodes);
+                if (eligibleCodes.length > appliedVouchers.length && posCart.length > 0) {
+                    showToast("Đã áp dụng mã giảm giá!", "success");
+                }
             }
         }
+
         const currentSubTotal = posCart.reduce((sum, item) => sum + (item.price * (parseInt(item.qty) || 0)), 0);
         if (paymentMethod === 'cash' && currentSubTotal === 0) setAmountTendered('');
-    }, [posCart, paymentMethod, appliedVouchers, vouchers]);
+    }, [posCart, paymentMethod, vouchers]);
 
     const handleApplyVoucher = (code) => {
         if (posCart.length === 0) {

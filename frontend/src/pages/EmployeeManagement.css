@@ -103,6 +103,14 @@
     background-color: #dc2626;
 }
 
+.btn-reset-pwd {
+    background-color: #8b5cf6;
+}
+
+.btn-reset-pwd:hover {
+    background-color: #7c3aed;
+}
+
 .emp-modal-box {
     background: #ffffff;
     width: 90%;
