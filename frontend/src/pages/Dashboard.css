@@ -87,7 +87,7 @@
 .dash-main-content {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
 }
 
 .dash-chart-section {
@@ -97,6 +97,7 @@
     padding: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     border: 1px solid #e5e7eb;
+    margin-top: 15px;
 }
 
 .chart-header {
@@ -139,7 +140,7 @@
 
 .svg-chart-wrapper {
     width: 100%;
-    height: 400px;
+    height: 380px;
     position: relative;
 }
 
