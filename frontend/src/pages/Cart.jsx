@@ -342,7 +342,7 @@ export default function Cart() {
                                     <h3 className="summary-title" style={{ borderBottom: '1px solid #e5e7eb', paddingBottom: '5px', marginBottom: '5px', fontSize: '13pt' }}>Thông tin đơn hàng</h3>
 
                                     <div style={{ marginBottom: '8px' }}>
-                                        <h4 style={{ margin: '0 0 4px 0', color: '#1f2937', fontSize: '11pt' }}>1. Thông tin chi tiết</h4>
+                                        <h4 style={{ margin: '0 0 4px 0', color: '#1f2937', fontSize: '11pt' }}>1. Thông tin giao hàng</h4>
                                         <input type="text" placeholder="Họ và tên người nhận" className="checkout-input" value={customerName} onChange={e => setCustomerName(e.target.value)} style={{ padding: '6px 10px', marginBottom: '6px' }} />
                                         <input type="number" placeholder="Số điện thoại liên hệ" className="checkout-input" value={customerPhone} onWheel={(e) => e.target.blur()} onKeyDown={(e) => ['e', 'E', '+', '-', '.', ','].includes(e.key) && e.preventDefault()} onChange={e => setCustomerPhone(e.target.value)} style={{ padding: '6px 10px', marginBottom: '6px' }} />
 

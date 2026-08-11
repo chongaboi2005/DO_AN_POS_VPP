@@ -161,7 +161,7 @@ export default function VoucherBlogManagement() {
 
             <div className="vm-header">
                 <h2 className="vm-title">Quản lý Khuyến mãi & Blog</h2>
-                <button className="global-btn-add" style={{marginRight: '15px'}} onClick={() => activeTab === 'blog' ? handleOpenCreateBlog() : handleOpenCreateVoucher()}>
+                <button className="global-btn-add" style={{ marginRight: '15px' }} onClick={() => activeTab === 'blog' ? handleOpenCreateBlog() : handleOpenCreateVoucher()}>
                     {activeTab === 'blog' ? '+ Thêm mới' : '+ Thêm mới'}
                 </button>
             </div>
@@ -298,9 +298,11 @@ export default function VoucherBlogManagement() {
                                     <label>{formData.type === 'pos' && formData.discount_type !== 'fixed' ? 'Mức giảm theo %' : 'Số tiền giảm (VNĐ)'}</label>
                                     <input
                                         type="number"
+                                        min="0"
                                         placeholder={formData.type === 'pos' && formData.discount_type !== 'fixed' ? "Ví dụ: 10" : "Ví dụ: 50000"}
                                         value={formData.discount_value}
                                         onWheel={e => e.target.blur()}
+                                        onKeyDown={(e) => ['e', 'E', '+', '-', '.', ','].includes(e.key) && e.preventDefault()}
                                         onChange={e => {
                                             let val = e.target.value;
                                             if (formData.type === 'pos' && formData.discount_type !== 'fixed' && Number(val) > 100) {
@@ -321,12 +323,28 @@ export default function VoucherBlogManagement() {
                             <div style={{ display: 'flex', gap: '10px' }}>
                                 <div className="vm-form-group" style={{ flex: 1 }}>
                                     <label>Đơn tối thiểu (VNĐ)</label>
-                                    <input type="number" placeholder="Ví dụ: 150000" value={formData.min_order} onWheel={e => e.target.blur()} onChange={e => setFormData({ ...formData, min_order: e.target.value })} />
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        placeholder="Ví dụ: 150000"
+                                        value={formData.min_order}
+                                        onWheel={e => e.target.blur()}
+                                        onKeyDown={(e) => ['e', 'E', '+', '-', '.', ','].includes(e.key) && e.preventDefault()}
+                                        onChange={e => setFormData({ ...formData, min_order: e.target.value })}
+                                    />
                                 </div>
                                 {formData.type === 'pos' && formData.discount_type !== 'fixed' && (
                                     <div className="vm-form-group" style={{ flex: 1 }}>
                                         <label>Giảm Tối đa (VNĐ)</label>
-                                        <input type="number" placeholder="Ví dụ: 30000" value={formData.max_discount} onWheel={e => e.target.blur()} onChange={e => setFormData({ ...formData, max_discount: e.target.value })} />
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            placeholder="Ví dụ: 30000"
+                                            value={formData.max_discount}
+                                            onWheel={e => e.target.blur()}
+                                            onKeyDown={(e) => ['e', 'E', '+', '-', '.', ','].includes(e.key) && e.preventDefault()}
+                                            onChange={e => setFormData({ ...formData, max_discount: e.target.value })}
+                                        />
                                     </div>
                                 )}
                             </div>

@@ -24,7 +24,7 @@ export default function OrderManagement() {
 
         socket.on('new_order', (newOrder) => {
             setOrders(prevOrders => [newOrder, ...prevOrders]);
-            showToast(`CÓ ĐƠN HÀNG MỚI! Khách hàng: ${newOrder.customer_name}`, 'success');
+            showToast(`Có đơn đặt hàng mới`, 'success');
         });
 
         socket.on('order_updated', ({ id, status, cashier_name, username }) => {

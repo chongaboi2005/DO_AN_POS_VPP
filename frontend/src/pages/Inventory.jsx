@@ -161,11 +161,11 @@ export default function Inventory() {
         <div className="inventory-container">
             {toast && <div className={"global-toast toast-" + toast.type}>{toast.message}</div>}
 
-            <div className="inventory-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <div className="inventory-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h2 className="inventory-title">Quản lý Sản phẩm</h2>
                 <div className="header-actions">
                     {role === 'admin' && (
-                        <button className="global-btn-add" style={{marginRight: '10px'}} onClick={() => handleOpenModal()}>+ Thêm Sản Phẩm Mới</button>
+                        <button className="global-btn-add" style={{ marginRight: '10px' }} onClick={() => handleOpenModal()}>+ Thêm Sản Phẩm Mới</button>
                     )}
                 </div>
             </div>
@@ -282,7 +282,16 @@ export default function Inventory() {
                                     {role === 'admin' && (
                                         <>
                                             <label style={{ fontWeight: 'bold', fontSize: '10pt', color: '#4b5563' }}>Giá bán (VND)</label>
-                                            <input type="number" className="inv-input" placeholder="Ví dụ: 10000"value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} onWheel={(e) => e.target.blur()} />
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                className="inv-input"
+                                                placeholder="Ví dụ: 10000"
+                                                value={formData.price}
+                                                onWheel={(e) => e.target.blur()}
+                                                onKeyDown={(e) => ['e', 'E', '+', '-', '.', ','].includes(e.key) && e.preventDefault()}
+                                                onChange={e => setFormData({ ...formData, price: e.target.value })}
+                                            />
                                         </>
                                     )}
                                 </div>
@@ -302,11 +311,11 @@ export default function Inventory() {
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', height: '240px', marginBottom: '20px' }}>
                                 <label style={{ fontWeight: 'bold', fontSize: '10pt', color: '#4b5563' }}>Mô tả sản phẩm</label>
-                                <ReactQuill 
-                                    theme="snow" 
+                                <ReactQuill
+                                    theme="snow"
                                     modules={quillModules}
                                     placeholder="Mô tả chi tiết sản phẩm..."
-                                    value={formData.description || ''} 
+                                    value={formData.description || ''}
                                     onChange={value => setFormData({ ...formData, description: value })}
                                     style={{ height: '178px', background: '#ffffff' }}
                                 />
